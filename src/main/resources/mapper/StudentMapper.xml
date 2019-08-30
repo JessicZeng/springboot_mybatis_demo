@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jessic.springboot.mybatisdemo.mapper.StudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jessic.springboot.mybatisdemo.domain.Student">
+        <id column="FuiId" property="FuiId"/>
+        <result column="FstrName" property="FstrName"/>
+        <result column="FuiSex" property="FuiSex"/>
+        <result column="FuiAge" property="FuiAge"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        FuiId,  FstrName, FuiSex, FuiAge
+    </sql>
+
+    <insert id="save">
+        INSERT INTO t_student (FuiId,FstrName,FuiSex,FuiAge)
+        VALUES (#{domain.FuiId},#{domain.FstrName},#{domain.FuiSex},#{domain.FuiAge})
+    </insert>
+
+
+    <select id="selectById" resultType="com.jessic.springboot.mybatisdemo.domain.Student">
+        select
+        <include refid="Base_Column_List" />
+        from t_student
+        where FuiId = #{id}
+    </select>
+
+
+    <update id="updateAge" >
+        update t_student set FuiAge=#{age}
+         where FuiId = #{id}
+    </update>
+
+    <delete id="deleteById" >
+        delete from t_student where FuiId = #{id}
+    </delete>
+
+
+</mapper>
